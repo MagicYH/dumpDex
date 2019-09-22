@@ -63,6 +63,3 @@ chmod 777 /data/local/tmp/libnativeDump.so
 
 ### 支持开发，欢迎打赏
 
-![](/pay.png)
-
-
