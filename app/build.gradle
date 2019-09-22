@@ -2,7 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-        releaseConfig
+        releaseConfig {
+            //if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+            storeFile file('/Users/magic/Project/Source/MyProject/Andorid/Tools/dumpDex/keystore/com.magicyh.dumpdex.keystore')
+            storePassword '11111a'
+            keyAlias 'com.magicyh.dumpdex'
+            keyPassword '11111a'
+            // }
+        }
     }
     compileSdkVersion 23
     buildToolsVersion '28.0.3'
@@ -42,6 +49,7 @@ android {
             path "CMakeLists.txt"
         }
     }
+
 }
 
 

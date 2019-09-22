@@ -5,12 +5,14 @@ import android.os.Build;
 import com.wrbug.dumpdex.dump.LowSdkDump;
 import com.wrbug.dumpdex.dump.OreoDump;
 import com.wrbug.dumpdex.util.DeviceUtils;
+import com.wrbug.dumpdex.util.Helper;
 
 import java.io.File;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+
 
 /**
  * XposedInit
@@ -24,6 +26,7 @@ public class XposedInit implements IXposedHookLoadPackage {
     public static void log(String txt) {
 
         XposedBridge.log("dumpdex-> " + txt);
+        Helper.logToFile("dumpdex->" + txt);
     }
 
     public static void log(Throwable t) {
@@ -32,6 +35,8 @@ public class XposedInit implements IXposedHookLoadPackage {
         }
         XposedBridge.log(t);
     }
+
+
 
     @Override
     public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam lpparam) {
@@ -47,6 +52,7 @@ public class XposedInit implements IXposedHookLoadPackage {
                 parent.mkdirs();
             }
             log("sdk version:" + Build.VERSION.SDK_INT);
+
             if (DeviceUtils.isOreo() || DeviceUtils.isPie()) {
                 OreoDump.init(lpparam);
             } else {
